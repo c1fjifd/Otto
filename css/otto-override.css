@@ -482,3 +482,22 @@ body > [class*="fixed"][class*="inset-0"] [class*="p-5"],
 body > [class*="fixed"][class*="inset-0"] [class*="p-6"] {
   background: transparent !important;
 }
+
+
+/* ===== FIX REAL DO MODAL QUIZ ===== */
+
+/* REMOVE overlay escuro */
+div[class*="fixed"][class*="inset-0"] {
+  background: transparent !important;
+}
+
+/* garante que o modal fique branco */
+div[class*="fixed"][class*="inset-0"] > div {
+  background: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* remove qualquer blur */
+div[class*="fixed"] {
+  backdrop-filter: none !important;
+}
