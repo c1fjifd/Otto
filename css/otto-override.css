@@ -389,58 +389,96 @@ p[class*="text-xs"][class*="text-center"][class*="text-muted-foreground"] {
   #otto-reviews .otto-reviews-summary { flex-direction: column; align-items: flex-start; gap: 14px; }
 }
 
+/* =========================================================
+   QUIZ POPUP / MODAL FIX — WHITE SOLID BACKGROUND
+   ========================================================= */
 
-
-
-/* ===== FIX MODAL QUIZ BACKGROUND ===== */
-
-/* container do modal */
-[class*="fixed"][class*="inset-0"] {
-  background: rgba(0,0,0,0.4) !important; /* mantém leve overlay */
+/* keep the dark overlay behind the popup */
+body > div[class*="fixed"][class*="inset-0"],
+body > div[class*="fixed"][class*="z-"],
+body > [class*="fixed"][class*="inset-0"] {
+  background: rgba(0, 0, 0, 0.45) !important;
 }
 
-/* caixa branca do modal */
-[class*="rounded-xl"][class*="bg-card"],
+/* force the popup/card itself to be solid white */
+[role="dialog"],
+[aria-modal="true"],
+[class*="dialog"],
+[class*="modal"],
+[class*="sheet-content"],
+[class*="drawer-content"],
+[class*="popover-content"],
 [class*="bg-card"],
-[class*="shadow-xl"] {
+body > [class*="fixed"][class*="inset-0"] > div,
+body > [class*="fixed"][class*="z-"] > div,
+body > [class*="fixed"][class*="inset-0"] [class*="rounded-xl"],
+body > [class*="fixed"][class*="inset-0"] [class*="rounded-2xl"],
+body > [class*="fixed"][class*="inset-0"] [class*="shadow-xl"],
+body > [class*="fixed"][class*="inset-0"] [class*="shadow-2xl"] {
   background: #ffffff !important;
+  background-color: #ffffff !important;
   opacity: 1 !important;
-}
-
-/* garantir que conteúdo interno não fique transparente */
-[class*="bg-card"] * {
-  opacity: 1 !important;
-}
-
-/* remove blur estranho se tiver */
-[class*="backdrop-blur"] {
   backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
-
-
-
-/* ===== FIX MODAL QUIZ BACKGROUND ===== */
-
-/* container do modal */
-[class*="fixed"][class*="inset-0"] {
-  background: rgba(0,0,0,0.4) !important; /* mantém leve overlay */
-}
-
-/* caixa branca do modal */
-[class*="rounded-xl"][class*="bg-card"],
-[class*="bg-card"],
-[class*="shadow-xl"] {
+/* prevent transparent inner wrappers inside the popup */
+[role="dialog"] > div,
+[aria-modal="true"] > div,
+[class*="dialog"] > div,
+[class*="modal"] > div,
+[class*="sheet-content"] > div,
+[class*="drawer-content"] > div,
+[class*="popover-content"] > div {
   background: #ffffff !important;
+  background-color: #ffffff !important;
   opacity: 1 !important;
 }
 
-/* garantir que conteúdo interno não fique transparente */
-[class*="bg-card"] * {
-  opacity: 1 !important;
-}
-
-/* remove blur estranho se tiver */
-[class*="backdrop-blur"] {
+/* remove any blur/frosted-glass effect that is washing out the modal */
+[class*="backdrop-blur"],
+[class*="bg-white/"],
+[class*="bg-background/"],
+[class*="bg-card/"] {
   backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* stronger target for the intro quiz popup layout */
+body > [class*="fixed"][class*="inset-0"] [class*="max-w"],
+body > [class*="fixed"][class*="inset-0"] [class*="w-full"][class*="rounded"],
+body > [class*="fixed"][class*="inset-0"] [class*="mx-4"][class*="rounded"] {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.28) !important;
+  border: none !important;
+  overflow: hidden !important;
+}
+
+/* keep header red, content white */
+body > [class*="fixed"][class*="inset-0"] [class*="max-w"] > :not(:first-child),
+body > [class*="fixed"][class*="inset-0"] [class*="w-full"][class*="rounded"] > :not(:first-child),
+body > [class*="fixed"][class*="inset-0"] [class*="mx-4"][class*="rounded"] > :not(:first-child) {
+  background: #ffffff !important;
+}
+
+/* make all text inside the popup fully visible */
+body > [class*="fixed"][class*="inset-0"] [class*="text-foreground"],
+body > [class*="fixed"][class*="inset-0"] h1,
+body > [class*="fixed"][class*="inset-0"] h2,
+body > [class*="fixed"][class*="inset-0"] h3,
+body > [class*="fixed"][class*="inset-0"] p,
+body > [class*="fixed"][class*="inset-0"] span,
+body > [class*="fixed"][class*="inset-0"] li {
+  opacity: 1 !important;
+}
+
+/* if the popup content area was inheriting transparent panels, force white */
+body > [class*="fixed"][class*="inset-0"] [class*="space-y-4"],
+body > [class*="fixed"][class*="inset-0"] [class*="space-y-5"],
+body > [class*="fixed"][class*="inset-0"] [class*="space-y-6"],
+body > [class*="fixed"][class*="inset-0"] [class*="p-4"],
+body > [class*="fixed"][class*="inset-0"] [class*="p-5"],
+body > [class*="fixed"][class*="inset-0"] [class*="p-6"] {
+  background: transparent !important;
 }
