@@ -379,20 +379,6 @@ p[class*="text-xs"][class*="text-center"][class*="text-muted-foreground"] {
   font-weight: 900 !important;
 }
 
-/* QUIZ / POPUP WHITE BACKGROUND FIX */
-div[class*="fixed"][class*="inset-0"] {
-  background: transparent !important;
-}
-div[class*="fixed"][class*="inset-0"] > div,
-div[class*="fixed"][class*="inset-0"] [class*="bg-card"],
-div[class*="fixed"][class*="inset-0"] [class*="rounded-xl"] {
-  background: #ffffff !important;
-  opacity: 1 !important;
-}
-div[class*="fixed"] {
-  backdrop-filter: none !important;
-}
-
 @media (min-width: 640px) {
   [class*="aspect-square"][class*="rounded-xl"] { height: 460px !important; }
   button[class*="funnel-cta"], .funnel-cta { font-size: 19px !important; padding: 18px 40px !important; }
