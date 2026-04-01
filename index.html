@@ -214,5 +214,89 @@
       });
     })();
   </script>
+
+  <script>
+    (function () {
+      var LOGO_SRC = 'logo-otto.png';
+
+      function looksLikeBrandLogo(el) {
+        if (!el || el.tagName !== 'IMG') return false;
+        var src = el.getAttribute('src') || '';
+        if (!src.startsWith('data:image/svg+xml')) return false;
+
+        var rect = el.getBoundingClientRect();
+        var w = rect.width || el.width || 0;
+        var h = rect.height || el.height || 0;
+        var inHeader = !!(el.closest('header') || el.closest('[class*="header"]') || el.closest('[class*="brand"]') || el.closest('[class*="logo"]'));
+        var nearTop = rect.top < 220;
+
+        return inHeader || nearTop || w >= 70 || h >= 18;
+      }
+
+      function replaceBrandLogos() {
+        var imgs = document.querySelectorAll('img[src^="data:image/svg+xml"]');
+        imgs.forEach(function (img) {
+          if (!looksLikeBrandLogo(img)) return;
+          if (img.dataset.ottoLogoApplied === '1') return;
+
+          img.dataset.ottoLogoApplied = '1';
+          img.removeAttribute('srcset');
+          img.setAttribute('src', LOGO_SRC);
+          img.setAttribute('alt', 'OTTO');
+
+          img.style.width = '112px';
+          img.style.height = '28px';
+          img.style.objectFit = 'contain';
+          img.style.objectPosition = 'left center';
+          img.style.display = 'block';
+          img.style.maxWidth = '112px';
+          img.style.minWidth = '112px';
+          img.style.filter = 'none';
+        });
+      }
+
+      function bootLogoSwap() {
+        replaceBrandLogos();
+        setTimeout(replaceBrandLogos, 250);
+        setTimeout(replaceBrandLogos, 700);
+        setTimeout(replaceBrandLogos, 1200);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bootLogoSwap);
+      } else {
+        bootLogoSwap();
+      }
+
+      var observer = new MutationObserver(function () {
+        replaceBrandLogos();
+      });
+
+      observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['src']
+      });
+
+      var _pushStateLogo = history.pushState;
+      var _replaceStateLogo = history.replaceState;
+
+      history.pushState = function () {
+        _pushStateLogo.apply(history, arguments);
+        setTimeout(replaceBrandLogos, 200);
+      };
+
+      history.replaceState = function () {
+        _replaceStateLogo.apply(history, arguments);
+        setTimeout(replaceBrandLogos, 200);
+      };
+
+      window.addEventListener('popstate', function () {
+        setTimeout(replaceBrandLogos, 200);
+      });
+    })();
+  </script>
+
 </body>
 </html>
