@@ -388,3 +388,55 @@ p[class*="text-xs"][class*="text-center"][class*="text-muted-foreground"] {
   [class*="aspect-square"][class*="rounded-xl"] { height: 300px !important; }
   #otto-reviews .otto-reviews-summary { flex-direction: column; align-items: flex-start; gap: 14px; }
 }
+
+
+
+
+
+/* ===== QUIZ MODAL: fundo branco no card + site visível atrás ===== */
+
+/* camada escura por trás, sem apagar o site */
+div[class*="fixed"][class*="inset-0"] {
+  background: rgba(0, 0, 0, 0.38) !important;
+  backdrop-filter: blur(2px) !important;
+  -webkit-backdrop-filter: blur(2px) !important;
+}
+
+/* caixa principal do popup */
+div[class*="fixed"][class*="inset-0"] > div,
+div[role="dialog"],
+div[aria-modal="true"] {
+  background: #ffffff !important;
+  opacity: 1 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+/* garante que blocos internos do quiz não herdem transparência */
+div[role="dialog"] *,
+div[aria-modal="true"] * {
+  opacity: 1 !important;
+}
+
+/* mantém cabeçalho do modal vermelho, se existir */
+div[role="dialog"] header,
+div[aria-modal="true"] header {
+  background: var(--otto-red) !important;
+}
+
+/* não deixar o botão branco */
+div[role="dialog"] .funnel-cta,
+div[aria-modal="true"] .funnel-cta,
+div[role="dialog"] button[class*="funnel-cta"],
+div[aria-modal="true"] button[class*="funnel-cta"] {
+  background: var(--otto-red) !important;
+  color: #fff !important;
+}
+
+/* evita que containers transparentes do quiz estraguem o fundo branco */
+div[role="dialog"] [class*="bg-card"],
+div[aria-modal="true"] [class*="bg-card"],
+div[role="dialog"] [class*="rounded-xl"],
+div[aria-modal="true"] [class*="rounded-xl"] {
+  background: #ffffff !important;
+}
