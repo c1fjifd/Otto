@@ -416,3 +416,31 @@ p[class*="text-xs"][class*="text-center"][class*="text-muted-foreground"] {
 [class*="backdrop-blur"] {
   backdrop-filter: none !important;
 }
+
+
+
+
+/* ===== FIX MODAL QUIZ BACKGROUND ===== */
+
+/* container do modal */
+[class*="fixed"][class*="inset-0"] {
+  background: rgba(0,0,0,0.4) !important; /* mantém leve overlay */
+}
+
+/* caixa branca do modal */
+[class*="rounded-xl"][class*="bg-card"],
+[class*="bg-card"],
+[class*="shadow-xl"] {
+  background: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* garantir que conteúdo interno não fique transparente */
+[class*="bg-card"] * {
+  opacity: 1 !important;
+}
+
+/* remove blur estranho se tiver */
+[class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+}
