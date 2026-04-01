@@ -530,3 +530,44 @@ header::before {
   background: url('/assets/logo-otto.png') no-repeat center;
   background-size: contain;
 }
+
+
+
+/* mata qualquer logo inline/svg da Cdiscount no topo/modal */
+img[src^="data:image/svg+xml"],
+img[src*="%3csvg"],
+svg {
+  opacity: 0 !important;
+}
+
+/* esconde wrappers comuns de logo no header/modal */
+header img,
+header svg,
+[class*="header"] img,
+[class*="header"] svg,
+[class*="logo"] img,
+[class*="logo"] svg {
+  opacity: 0 !important;
+}
+
+/* coloca a nova logo por cima */
+header,
+[class*="header"],
+[class*="logo"] {
+  position: relative !important;
+}
+
+header::before,
+[class*="header"]::before,
+[class*="logo"]::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 120px;
+  height: 32px;
+  background: url('/assets/logo-otto.png') no-repeat center / contain;
+  z-index: 20;
+  pointer-events: none;
+}
