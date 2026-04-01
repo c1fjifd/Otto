@@ -501,3 +501,32 @@ div[class*="fixed"][class*="inset-0"] > div {
 div[class*="fixed"] {
   backdrop-filter: none !important;
 }
+
+
+
+/* ===== TROCAR TODAS LOGOS SVG INLINE ===== */
+
+/* esconde TODAS logos inline SVG */
+img[src^="data:image/svg+xml"] {
+  display: none !important;
+}
+
+/* adiciona logo OTTO no header */
+header::before {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 32px;
+  background: url('/assets/logo-otto.png') no-repeat center;
+  background-size: contain;
+}
+
+/* caso tenha mais de um header/area */
+[class*="header"]::before {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 32px;
+  background: url('/assets/logo-otto.png') no-repeat center;
+  background-size: contain;
+}
